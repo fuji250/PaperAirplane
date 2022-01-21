@@ -29,8 +29,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+
+
         axisH = Input.GetAxisRaw("Horizontal");
         axisV = Input.GetAxisRaw("Vertical");
+
+        /*
         if(axisH > 0.0f)
         {
             transform.localScale = new Vector2(1,1);
@@ -53,16 +57,27 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+        */
     }
 
     void FixedUpdate()
     {
+        //GamOverââèo
+        if(gameState == "gameover")
+        {
+            Vector2 myGravity = new Vector2(0, -10);
+
+            rbody.AddForce(myGravity);
+        }
+
         if(gameState != "playing")
         {
+            Debug.Log(gameState);
             return;
         }
-        rbody.velocity = new Vector2(speed * axisH,speed * axisV);
+        rbody.velocity = new Vector2(speed * axisH + 1f,speed * axisV);
 
+        
     }
     public void Jump()
     {
@@ -86,6 +101,9 @@ public class PlayerController : MonoBehaviour
     {
         gameState = "gameclear";
         GameStop();
+        //GameClearââèo
+        GetComponent<PolygonCollider2D>().enabled = false;
+        rbody.AddForce(new Vector2(4,0),ForceMode2D.Impulse);
     }
 
     public void GameOver()
@@ -93,7 +111,7 @@ public class PlayerController : MonoBehaviour
         gameState = "gameover";
         GameStop();
         //GameOverââèo
-        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<PolygonCollider2D>().enabled = false;
         rbody.AddForce(new Vector2(0,5),ForceMode2D.Impulse);
     }
     void GameStop()

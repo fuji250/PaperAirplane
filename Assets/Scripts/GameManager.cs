@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             Button bt = restartButton.GetComponent<Button>();
             bt.interactable = false;
             mainImage.GetComponent<Image>().sprite = gameClearSpr;
-            PlayerController.gameState = "gameend";
+            //PlayerController.gameState = "gameend";
         }
         else if(PlayerController.gameState == "gameover")
         {
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             Button bt = nextButton.GetComponent<Button>();
             bt.interactable = false;
             mainImage.GetComponent<Image>().sprite = gameOverSpr;
-            PlayerController.gameState = "gameend";
+            //PlayerController.gameState = "gameend";
         }
         else if(PlayerController.gameState == "playing")
         {
